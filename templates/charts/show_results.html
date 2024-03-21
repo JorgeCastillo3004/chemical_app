@@ -1,0 +1,13 @@
+<!-- templates/charts/show_history.html -->
+{% extends "base.html" %}
+
+{% block title %}Show test results{% endblock %}
+
+{% block content %}
+<h2>Show results</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form }}
+  <button type="submit">Cargar resultados</button>
+</form>
+{% endblock %}

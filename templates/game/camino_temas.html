@@ -1,0 +1,36 @@
+
+{% extends "base.html" %}
+
+{% block title %}Pagina inicial{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="sidebar-container">
+        <div class="btn-group-vertical">
+          {% if user.is_authenticated %}
+            <p class="user-greeting">Hola {{ user.username }}!</p>
+          {% else %}
+            <p class="user-greeting">Aún no estas logeado</p>
+          {% endif %}          
+          <a href="{% url 'home' %}" class="btn btn-warning">Inicio</a>
+            {% csrf_token %}
+            <button type="submit" class="btn btn-warning">Salir</button>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="camino">        
+        {% for tema in temas %}
+            {% if forloop.counter|divisibleby:2 %}                
+                <a href="{% url 'mostrar_preguntas' tema=tema numero_pregunta=1 %}" class="btn btn-warning circle">{{ tema }}</a>
+            {% else %}
+                <a href="{% url 'mostrar_preguntas' tema=tema numero_pregunta=1 %}" class="btn btn-warning circle">{{ tema }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

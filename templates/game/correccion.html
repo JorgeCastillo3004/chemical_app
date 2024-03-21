@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corrección</title>
+</head>
+<body>
+    <div id="mensaje_correccion">
+        Tema actual {{ tema }}
+        Pregunta {{ pregunta_id }}
+        {% if correcta %}
+            <div id="resultado_correccion">¡Respuesta correcta!</div>
+        {% else %}
+            <div id="resultado_correccion">Respuesta incorrecta. La respuesta correcta es: {{ respuesta_correcta }}</div>
+        {% endif %}
+        <div id="explicacion_correccion">{{ explicacion }}</div>        
+        <a href="#" onclick="siguientePregunta('{{ tema }}', {{ pregunta_id }})">Siguiente Pregunta</a>        
+    </div>
+
+    <script>
+        function siguientePregunta(tema, pregunta_id) {
+            console.log("Ejecucion de funcion siguiente pregunta, valor inicial: ", pregunta_id);
+            // Incrementar en 1 el valor de pregunta_id
+            console.log("Nuevo valor de pregunta_id:", pregunta_id);
+            pregunta_id++;            
+            // Redirigir a la vista mostrar_preguntas con el nuevo valor de pregunta_id            
+            console.log("Nuevo valor de pregunta_id:", pregunta_id);            
+            var url = "/game/mostrar_preguntas/" + tema + "/" + pregunta_id + "/";
+            console.log("URL redirigida:", url);
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>

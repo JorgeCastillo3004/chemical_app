@@ -1,0 +1,132 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.camino {
+    margin-top: 20px;
+}
+
+.camino h2 {
+    margin-bottom: 10px;
+}
+
+.camino ul {
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+.camino ul li {
+    margin-bottom: 5px;
+}
+
+.sidebar {
+  background-color: #f0f0f0;
+  padding: 10px;
+}
+
+.sidebar .btn {
+  margin-bottom: 10px;
+}
+
+.btn {
+  height: 40px;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  color: #007bff;
+  font-weight: 500;
+  line-height: 25px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 4px 8px;
+  margin-bottom: 10px;
+}
+
+.btn:hover {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+  border-color: #e0a800;
+}
+
+.user-greeting {
+    color: #007bff; /* Color del texto */
+    font-weight: bold; /* Fuente en negrita */
+    font-size: 30px; /* Tamaño de la fuente */
+}
+
+/* Estilos para la barra lateral */
+.sidebar-container {
+  float: left; /* Alinea la barra lateral a la izquierda */
+  width: 200px; /* Ancho de la barra lateral */
+  background-color: #f0f0f0; /* Color de fondo de la barra lateral */
+  padding: 20px; /* Espaciado interno de la barra lateral */
+}
+
+/* Estilos para los botones dentro de la barra lateral */
+.sidebar-container .btn {
+  display: block; /* Convierte los botones en bloques para que ocupen toda la anchura */
+  margin-bottom: 10px; /* Espacio entre los botones */
+}
+
+/* Estilos para la imagen */
+.col-md-12 img {
+  max-width: calc(100% - 220px); /* Calcula el ancho máximo de la imagen restando el ancho de la barra lateral */
+  height: auto; /* Mantén la proporción de la imagen */
+  margin-left: 20px; /* Margen izquierdo para separar la imagen de la barra lateral */
+}
+
+.circle {
+	display: inline-block;
+	text-decoration: none;
+/*	color: #007bff;*/
+	border: 2px solid #007bff;
+	border-radius: 50%;
+	width: 140px; /* Aumentar el tamaño de los círculos */
+	height: 140px; /* Aumentar el tamaño de los círculos */
+	line-height: 140px; /* Aumentar el tamaño de los círculos */
+	text-align: center;
+	transition: background-color 0.3s ease;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	margin-bottom: 60px; /* Espacio entre los círculos */
+	position: relative; /* Agregado para posicionar los círculos */
+	z-index: 1; /* Colocar delante del camino */
+	}
+.circle:hover {
+	background-color: #007bff;
+	color: #fff;
+	}
+
+.sidebar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.camino {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.camino a {
+    position: relative;
+    bottom: 0;
+    transition: bottom 0.5s ease-in-out;
+}
+
+.camino a:nth-child(odd) {
+    left: 50px;
+}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Pagina inicial{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="sidebar-container">
+        <div class="btn-group-vertical">
+          {% if user.is_authenticated %}
+            <p class="user-greeting">Hola {{ user.username }}!</p>
+          {% else %}
+            <p class="user-greeting">Aún no estas logeado</p>
+          {% endif %}
+          <a href="{% url 'game' %}" class="btn btn-warning">Iniciar Preparación</a>
+          <a href="{% url 'password_change' %}" class="btn btn-warning">Tomar prueba</a>
+          <a href="{% url 'charts' %}" class="btn btn-warning">Mostrar estadisticas</a>
+          <a href="{% url 'show_results' %}" class="btn btn-warning">Mostrar resultados</a>
+          <a href="{% url 'password_change' %}" class="btn btn-warning">Cambiar contraseña</a>
+          <a href="{% url 'logout' %}" class="btn btn-warning">Salir</a>
+          <a action="{% url 'logout' %}" method="post">            
+            {% csrf_token %}
+            <button type="submit" class="btn btn-warning">Salir</button>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <img src="{% static 'img/image.jpeg' %}" alt="Image" style="max-width: 100%; height: auto; float: left;">
+    </div>
+  </div>
+</div>
+{% endblock %}

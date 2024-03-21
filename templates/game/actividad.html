@@ -1,0 +1,25 @@
+<!-- actividad.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Actividad</title>
+</head>
+<body>
+    <h1>Actividad</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for pregunta in preguntas %}
+            <p>{{ pregunta.pregunta_text }}</p>
+            <input type="radio" name="respuesta" value="a"> {{ pregunta.opcion_a }}<br>
+            <input type="radio" name="respuesta" value="b"> {{ pregunta.opcion_b }}<br>
+            <input type="radio" name="respuesta" value="c"> {{ pregunta.opcion_c }}<br>
+            <input type="radio" name="respuesta" value="d"> {{ pregunta.opcion_d }}<br>
+            <br>
+            {% if pregunta.id %}
+                <input type="submit" formaction="{% url 'verificar_respuesta' pregunta.id %}" value="Enviar">
+            {% endif %}
+        {% endfor %}
+    </form>
+</body>
+</html>

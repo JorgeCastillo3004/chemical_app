@@ -1,0 +1,20 @@
+<!-- preguntas_por_tema.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Preguntas por Tema - {{ tema }}</title>
+</head>
+<body>
+    <h1>Preguntas por Tema - {{ tema }}</h1>
+    {% if preguntas %}
+        <ul>
+            {% for pregunta in preguntas %}
+                <li>{{ pregunta.pregunta_text }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay preguntas disponibles para este tema.</p>
+    {% endif %}
+</body>
+</html>

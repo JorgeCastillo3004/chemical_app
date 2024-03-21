@@ -1,0 +1,31 @@
+<!-- templates/registration/login.html -->
+
+{% extends "base.html" %}
+
+{% block title %}Pagina inicial{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="sidebar-container">
+        <div class="btn-group-vertical">
+          {% if user.is_authenticated %}
+            <p class="user-greeting">Hi {{ user.username }}!</p>
+          {% else %}
+            <p class="user-greeting">You are not logged in</p>
+          {% endif %}
+          <a href="{% url 'camino_temas' %}" class="btn btn-warning">Lecturas</a>          
+          <a href="{% url 'camino_temas' %}" class="btn btn-warning">Pruebas</a>
+          <a href="{% url 'actividad_interactiva' %}" class="btn btn-warning">Actividad interactiva</a>
+          <a href="{% url 'home' %}" class="btn btn-warning">Inicio</a>          
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <img src="{% static 'img/image.jpeg' %}" alt="Image" style="max-width: 100%; height: auto; float: left;">
+    </div>
+  </div>
+</div>
+{% endblock %}

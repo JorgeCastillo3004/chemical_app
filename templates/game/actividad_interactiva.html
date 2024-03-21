@@ -1,0 +1,47 @@
+<!-- templates/registration/login.html -->
+{% extends "base.html" %}
+
+{% block title %}Actividad interactiva{% endblock %}
+
+{% block content %}
+<h2>Actividad interactiva V2</h2>
+
+<p><a href="{% url 'game_results' %}">Otro link</a></p>
+<form method="post">
+  {% csrf_token %}
+  {{ form }}
+  <button type="submit">Iniciar Juego</button>
+</form>
+
+<div class="container">
+    <h1>Quiz</h1>
+    <p>What is the capital of France?</p>
+    <form id="quiz-form">
+        <div class="options">
+            <label><input type="radio" name="answer" value="paris"> Paris</label>
+            <label><input type="radio" name="answer" value="london"> London</label>
+            <label><input type="radio" name="answer" value="berlin"> Berlin</label>
+            <label><input type="radio" name="answer" value="rome"> Rome</label>
+        </div>
+        <button type="button" id="submit-btn">Check Answer</button>
+    </form>
+    <div id="result"></div>
+</div>
+
+<script>
+    document.getElementById('submit-btn').addEventListener('click', function() {
+        var selectedAnswer = document.querySelector('input[name="answer"]:checked');
+        var resultDiv = document.getElementById('result');
+        if (selectedAnswer) {
+            if (selectedAnswer.value === 'paris') {
+                resultDiv.textContent = "Correct! Paris is the capital of France.";
+            } else {
+                resultDiv.textContent = "Incorrect! The correct answer is Paris.";
+            }
+        } else {
+            resultDiv.textContent = "Please select an answer.";
+        }
+    });
+</script>
+
+{% endblock %}

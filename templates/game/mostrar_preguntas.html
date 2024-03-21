@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas</title>
+</head>
+<body>
+    <div id="pregunta">
+        Pregunta {{ pregunta.id }} de {{ total_preguntas }}
+        {% if pregunta %}
+            <h3>{{ pregunta.pregunta_text }}</h3>            
+            <form id="form_respuesta" method="post" action="{% url 'corregir_respuesta' %}">
+                {% csrf_token %}
+                <input type="hidden" name="pregunta_id" value="{{ pregunta.id }}">
+                <input type="radio" name="opcion" value="a"> {{ pregunta.opcion_a }}<br>
+                <input type="radio" name="opcion" value="b"> {{ pregunta.opcion_b }}<br>
+                <input type="radio" name="opcion" value="c"> {{ pregunta.opcion_c }}<br>
+                <input type="radio" name="opcion" value="d"> {{ pregunta.opcion_d }}<br>
+                <input type="submit" value="Corregir">
+            </form>
+        {% else %}
+            <p id="mensaje_fin">No hay más preguntas disponibles.</p>
+        {% endif %}
+    </div>
+
+    <div id="mensaje_correccion" style="display: none;">
+        <div id="resultado_correccion"></div>
+        <div id="explicacion_correccion"></div>
+        <button id="siguiente_pregunta">Siguiente Pregunta</button>
+    </div>
+
+    <script>
+        document.getElementById('form_respuesta').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var form_data = new FormData(this);
+            fetch(this.action, {
+                method: 'POST',
+                body: form_data,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('mensaje_correccion').style.display = 'block';
+                if (data.correcta) {
+                    document.getElementById('resultado_correccion').innerText = '¡Respuesta correcta!';
+                } else {
+                    document.getElementById('resultado_correccion').innerText = 'Respuesta incorrecta. La respuesta correcta es: ' + data.respuesta_correcta;
+                }
+                document.getElementById('explicacion_correccion').innerText = data.explicacion;
+                document.getElementById('pregunta').style.display = 'none';
+            });
+        });
+
+        document.getElementById('siguiente_pregunta').addEventListener('click', function() {
+            // Obtener el tema y el número de la próxima pregunta
+            var tema = document.getElementById('tema').value;
+            var numero_pregunta = parseInt(document.getElementById('numero_pregunta').value) + 1;
+            console.log("Tema: ", tema):
+            console.log("Pregunta #: ", numero_pregunta)
+            // Realizar una solicitud GET a la vista mostrar_preguntas con el tema y el número de la próxima pregunta como parámetros
+            fetch('{% url "mostrar_preguntas" %}?tema=' + tema + '&numero_pregunta=' + numero_pregunta)
+            .then(response => response.text())
+            .then(data => {
+                // Verificar si se recibió una nueva pregunta
+                if (data !== '') {
+                    // Actualizar el contenido del elemento con el id 'pregunta' con la nueva pregunta
+                    document.getElementById('pregunta').innerHTML = data;
+                    // Ocultar el mensaje de corrección
+                    document.getElementById('mensaje_correccion').style.display = 'none';
+                } else {
+                    // Mostrar un mensaje indicando que no hay más preguntas disponibles
+                    document.getElementById('mensaje_fin').innerText = 'No hay más preguntas disponibles.';
+                    // Ocultar el mensaje de corrección
+                    document.getElementById('mensaje_correccion').style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

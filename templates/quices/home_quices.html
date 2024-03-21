@@ -1,0 +1,14 @@
+<!-- templates/registration/login.html -->
+{% extends "base.html" %}
+
+{% block title %}Quices{% endblock %}
+
+{% block content %}
+<h2>Start Game</h2>
+<p><a href="{% url 'game_results' %}">Seleccionar nivel de dificultad</a></p>
+<form method="post">
+  {% csrf_token %}
+  {{ form }}
+  <button type="submit">Restart test</button>
+</form>
+{% endblock %}
