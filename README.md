@@ -26,5 +26,5 @@ Ensure you have the following installed:
 ### Backend Setup
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/chemistry-learning-app.git
+   git clone https://github.com/JorgeCastillo3004/chemistry-learning-app.git
    cd chemistry-learning-app
